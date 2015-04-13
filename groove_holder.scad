@@ -45,14 +45,13 @@ intersection(){
 	cylinder(h = 1, r1 =ring_dia/2, r2=(ring_dia-1)/2);
 
 //screw fixings - use washers
+hull() {
     translate([-push_out, fix_bolt_width/2, (6.7+groove_width)/2])rotate([90,0,90])
 	cylinder(h = push_out+bolt_base_thickness, r =8/2, $fn =32);
 
     translate([-push_out, -fix_bolt_width/2, (6.7+groove_width)/2])rotate([90,0,90])
 	cylinder(h = push_out+bolt_base_thickness, r =8/2, $fn =32);
-
-    translate([-push_out, -fix_bolt_width/2, (-8+6.7+groove_width)/2])
-	cube([push_out+bolt_base_thickness,fix_bolt_width,8]);
+}
 
 // mark front
 intersection(){
