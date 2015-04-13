@@ -5,8 +5,8 @@
 
 $fn=64;
 
+fix_bolt_width = 26; // length between two M3 bolts
 push_out = 17; // nozzle location from back plate
-fix_bolt_width = 26;
 groove_width = 6 -0.3; // E3D V6 = 6mm, V5 = 5.6mm, Clone = 5.8mm, MakerGear/J-Head/Prusa MK2 = 4.64mm
 
 ring_dia = 24;
@@ -35,11 +35,13 @@ intersection(){
 	cube([push_out,ring_dia,6.7+groove_width]);
  }
 // groove neck outer
-translate([0, 0, 0])
+	translate([0, 0, 0])
 	cylinder(h = 1, r1 =(ring_dia-1)/2, r2 =ring_dia/2);
-translate([0, 0, 1])
+
+	translate([0, 0, 1])
 	cylinder(h = 4.7+groove_width, r =ring_dia/2);
-translate([0, 0, 5.7+groove_width])
+
+	translate([0, 0, 5.7+groove_width])
 	cylinder(h = 1, r1 =ring_dia/2, r2=(ring_dia-1)/2);
 
 //screw fixings - use washers
@@ -54,7 +56,6 @@ translate([0, 0, 5.7+groove_width])
 
 // mark front
 intersection(){
-//translate([0, 0, 0])
 	cylinder(h = 6.7+groove_width, r =(ring_dia+2)/2);
 
 union() {
@@ -68,11 +69,13 @@ union() {
 }
 // groove neck inner
 union(){
-translate([0, 0, -0.1])
+	translate([0, 0, -0.1])
 	cylinder(h = 3.2, r =top_dia/2);
-translate([0, 0, 3])
+
+	translate([0, 0, 3])
 	cylinder(h = 0+groove_width, r =groove_dia/2);
-translate([0, 0, 3+groove_width])
+
+	translate([0, 0, 3+groove_width])
 	cylinder(h = 4, r =top_dia/2);
 }
 
@@ -107,8 +110,10 @@ for ( i = [0 : 11] )
  }
 }
 
+// split into two parts
 difference(){
-neck_holder();
+	neck_holder();
+
 	translate([0, -20, -3])
 	cube([20,41,20]);
 }
@@ -119,7 +124,3 @@ intersection(){
 	translate([1, -20, -3])
 	cube([20,41,20]);
 }
-
-//    translate([-push_out-5, fix_bolt_width/2, (6.7+groove_width)/2])rotate([90,0,90])
-//	cylinder(h = 30, r =3.4/2, $fn =32);
-
